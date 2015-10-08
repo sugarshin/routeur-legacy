@@ -1,0 +1,64 @@
+{
+  "name": "routeur-legacy",
+  "version": "0.0.1",
+  "description": "routeur for legacy browser",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sugarshin/routeur-legacy.git"
+  },
+  "main": "index.js",
+  "files": [
+    "lib",
+    "index.js",
+    "test",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "router",
+    "route",
+    "routing",
+    "url",
+    "routeur",
+    "routeur-legacy"
+  ],
+  "scripts": {
+    "start": "coffee -cw -o lib src",
+    "lint": "coffeelint -f coffeelint.json src/routeur-legacy.coffee",
+    "test": "mocha --require espower-coffee/guess test/**/*.coffee",
+    "compile": "coffee -c -o lib src",
+    "build": "npm run lint && npm test && npm run compile"
+  },
+  "testling": {
+    "files": "test/**/*.coffee",
+    "harness": "mocha",
+    "browsers": [
+      "ie/8..latest",
+      "chrome/31..latest",
+      "firefox/38..latest",
+      "safari/latest",
+      "opera/latest",
+      "iphone/latest",
+      "ipad/latest",
+      "android-browser/latest"
+    ]
+  },
+  "author": "sugarshin",
+  "license": "MIT",
+  "devDependencies": {
+    "coffee-script": "^1.10.0",
+    "coffeelint": "^1.13.0",
+    "espower-coffee": "^1.0.0",
+    "mocha": "^2.3.3",
+    "power-assert": "^1.1.0"
+  },
+  "dependencies": {
+    "array-foreach": "^1.0.1",
+    "ext-regex": "^1.0.0",
+    "glob-to-regexp": "^0.1.0",
+    "isarray": "^0.0.1",
+    "object-assign": "^4.0.1",
+    "object-keys": "^1.0.7",
+    "object.omit": "^2.0.0"
+  }
+}
