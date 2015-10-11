@@ -21,12 +21,12 @@ module.exports =
 class Routeur
 
   constructor: (@routes = {}, config) ->
-    @config = assign {rootPath: ''}, config
+    @config = assign { rootPath: '' }, config
 
   run: (currentPathName = location.pathname or '') ->
     objectForEach @routes, (actionOrActions, pathName) =>
       globPath = @_getGlobPath @config.rootPath, pathName
-      regexp = globToRegexp globPath, {extended: true}
+      regexp = globToRegexp globPath, { extended: true }
 
       if regexp.test(currentPathName)
         if isFunction(actionOrActions)
