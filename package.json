@@ -25,12 +25,12 @@
   "scripts": {
     "start": "coffee -cw -o lib src",
     "lint": "coffeelint -f coffeelint.json src/routeur-legacy.coffee",
-    "test": "mocha --require espower-coffee/guess test/**/*.coffee",
+    "test": "mocha test/**/*.js",
     "compile": "coffee -c -o lib src",
     "build": "npm run lint && npm test && npm run compile"
   },
   "testling": {
-    "files": "test/**/*.coffee",
+    "files": "test/**/*.js",
     "harness": "mocha",
     "browsers": [
       "ie/8..latest",
