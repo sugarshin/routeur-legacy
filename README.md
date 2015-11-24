@@ -1,6 +1,8 @@
 # routeur-legacy
 
 [![Build Status][travis-image]][travis-url]
+[![Dependency Status][david-image]][david-url]
+[![Devdependency Status][david-dev-image]][david-dev-url]
 [![GitHub version][github-ver-image]][github-ver-url]
 [![License][license-image]][license-url]
 
@@ -28,6 +30,10 @@ npm i routeur-legacy
 [npm-url]: https://www.npmjs.org/package/routeur-legacy
 [bower-image]: http://img.shields.io/bower/v/routeur-legacy.svg
 [bower-url]: http://bower.io/search/?q=routeur-legacy
+[david-image]: https://david-dm.org/sugarshin/routeur-legacy.svg
+[david-url]: https://david-dm.org/sugarshin/routeur-legacy
+[david-dev-image]: https://david-dm.org/sugarshin/routeur-legacy/dev-status.svg
+[david-dev-url]: https://david-dm.org/sugarshin/routeur-legacy#info=devDependencies
 [travis-image]: http://img.shields.io/travis/sugarshin/routeur-legacy/master.svg?branch=master
 [travis-url]: https://travis-ci.org/sugarshin/routeur-legacy
 [gratipay-image]: http://img.shields.io/gratipay/sugarshin.svg
