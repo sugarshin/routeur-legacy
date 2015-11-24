@@ -15,16 +15,8 @@ describe 'Router', ->
       router = new Router routes
 
       assert router instanceof Router
-      assert.deepEqual router.routes, routes
-      assert.deepEqual router.config, {rootPath: ''}
-
-  describe 'configure', ->
-    it 'case1', ->
-      config = rootPath: '/path/to'
-
-      router = new Router()
-      router.configure config
-      assert.deepEqual router.config, config
+      assert.deepEqual router._routes, routes
+      assert.deepEqual router._config, { rootPath: '' }
 
   describe 'run', ->
     it 'case / => /index.html', ->
@@ -101,26 +93,14 @@ describe 'Router', ->
       router.run()
       assert expected
 
-  describe 'addRoute', ->
+  describe 'route', ->
     it 'case1', ->
       global.location.pathname = '/'
 
       expected = false
       router = new Router()
 
-      router.addRoute '/', -> expected = true
-
-      router.run()
-      assert expected
-
-  describe 'removeRoute', ->
-    it 'case1', ->
-      global.location.pathname = '/'
-
-      expected = true
-      router = new Router '/': -> expected = false
-
-      router.removeRoute '/'
+      router.route '/', -> expected = true
 
       router.run()
       assert expected

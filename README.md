@@ -4,8 +4,6 @@
 [![GitHub version][github-ver-image]][github-ver-url]
 [![License][license-image]][license-url]
 
-[![browser support][testling-svg]][testling-url]
-
 [routeur](https://github.com/sugarshin/routeur) for legacy browser
 
 ```

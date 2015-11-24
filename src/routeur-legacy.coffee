@@ -7,50 +7,38 @@
 'use strict'
 
 globToRegexp = require 'glob-to-regexp'
-assign = require 'object-assign'
-omit = require 'object.omit'
-extRegex = require 'ext-regex'
-arrayForeach = require 'array-foreach'
-isArray = require 'isarray'
 
-objectForEach = require './util/objectForEach'
-indexRegex = require './util/indexRegex'
-isFunction = require './util/isFunction'
+objectForEach = require './utils/objectForEach'
+isArray = require './utils/isArray'
+indexRegex = require './utils/indexRegex'
+extRegex = require './utils/extRegex'
 
 module.exports =
 class Routeur
 
-  constructor: (@routes = {}, config) ->
-    @config = assign { rootPath: '' }, config
+  constructor: (@_routes = {}, @_config = { rootPath: '' }) ->
 
   run: (currentPathName = location.pathname or '') ->
-    objectForEach @routes, (actionOrActions, pathName) =>
-      globPath = @_getGlobPath @config.rootPath, pathName
+    objectForEach @_routes, (action, pathName) =>
+      globPath = @_getGlobPath pathName
       regexp = globToRegexp globPath, { extended: true }
+      @_createFinalAction(action)() if regexp.test(currentPathName)
 
-      if regexp.test(currentPathName)
-        if isFunction(actionOrActions)
-          actionOrActions()
-        else if isArray(actionOrActions)
-          arrayForeach actionOrActions, (action) -> action()
+  route: (pathName, action) ->
+    if typeof action isnt 'function' then throw new TypeError "#{action} is not a function"
+    @_routes[pathName] = action
 
-  configure: (config) ->
-    @config = assign {}, @config, config
-    return this
+  _createFinalAction: (action) ->
+    if isArray(action) then ->
+      for func in action then func()
+    else
+      action
 
-  addRoute: (pathName, actionOrActions) ->
-    @routes[pathName] = actionOrActions
-    return this
-
-  removeRoute: (pathName) ->
-    @routes = omit @routes, pathName
-    return this
-
-  _getGlobPath: (rootPath, pathName) ->
-    if extRegex().test(pathName)
-      return "#{rootPath}#{pathName}"
-
+  _getGlobPath: (pathName) ->
     if indexRegex().test(pathName)
-      return "#{rootPath}#{pathName}{,index.html}"
+      return "#{@_config.rootPath}#{pathName}{,index.*}"
 
-    return "#{rootPath}#{pathName}{/,/index.html}"
+    if extRegex().test(pathName)
+      return "#{@_config.rootPath}#{pathName}"
+
+    return "#{@_config.rootPath}#{pathName}{/,/index.*}"
